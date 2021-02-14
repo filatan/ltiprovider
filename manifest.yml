@@ -1,0 +1,12 @@
+---
+applications:
+- instances: 1
+  timeout: 180
+  name: ltiprovider
+  buildpack: sdk-for-nodejs
+  command: npm start
+  memory: 256MB
+  domain: eu-gb.cf.appdomain.cloud
+  host: ltiprovider
+  services:
+    - cloudant-ltiprovider-ikjv51vzs6xf5-8-88087

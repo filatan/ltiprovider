@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cuestionario</title>
+        <link rel="stylesheet" type="text/css" href="/style-quiz.css">
+        <link rel="stylesheet" type="text/css" href="/style-topNav.css">
+
+        <script>
+            //PARAMS**GO**HERE
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            let url = "https://secret-dawn-80749.herokuapp.com/api/Cuestionarios/";
+            let idCuestionario = this.params.idCuestionario;
+            let sessionID = this.params.sessionID;
+            let idJuegoCuestionario = this.params.idJuegoCuestionario;
+            let questions  = [];
+            url = url.concat(idCuestionario);
+            url = url.concat("/Preguntas");
+            $(document).ready(function(){
+                $.get(url, function(data, status){
+                    var stringified = JSON.stringify(data);
+                    var parsedObj = JSON.parse(stringified);
+                    console.log(parsedObj);
+
+                    for(var k=0; k < parsedObj.length; k++){
+                        questions.push({question: parsedObj[k].Pregunta,
+                            choiceA : parsedObj[k].RespuestaCorrecta,
+                            choiceB : parsedObj[k].RespuestaIncorrecta1,
+                            choiceC : parsedObj[k].RespuestaIncorrecta2,
+                            choiceD : parsedObj[k].RespuestaIncorrecta3,
+                            correct : parsedObj[k].RespuestaCorrecta});
+                    }
+
+                    console.log(questions);
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="topnav">
+            <a onClick="
+                var path = `/cuestionarios/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+                document.location = path;
+                ">Lista cuestionarios</a>
+
+            <a onClick="
+            var path = `/avatar/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Mi avatar</a>
+
+            <a onClick="
+            var path = `/alumnos/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de alumnos</a>
+
+            <a onClick="
+            var path = `/profesores/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de profesores </a>
+
+            <div id = "name" class = "profile">
+                <script>
+                    document.write(`Hola ${params.user}`);
+                </script>
+            </div>
+            <div id="profile" class ="profile"></div>
+        </div>
+        <p/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var imagenUrl = "https://secret-dawn-80749.herokuapp.com/api/imagenes/imagenAlumno/download/";
+            var nombreImagen = this.params.imagenPerfil;
+            var urlImage = imagenUrl.concat(nombreImagen);
+            document.getElementById('profile').innerHTML = '<img src="' + urlImage + '" id="profileImage" style="width: 50px;height: 50px;"/>';
+        </script>
+        <div id="container">
+            <div id="start">Start Quiz!</div>
+            <div id="quiz" style="display: none">
+                <div id="question"></div>
+                <div id="choices">
+                    <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+                    <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+                    <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+                    <div class="choice" id="D" onclick="checkAnswer('D')"></div>
+                </div>
+                <div id="progress"></div>
+            </div>
+            <div id="scoreContainer" style="display: none"></div>
+        </div>
+
+        <script src="/quiz.js"></script>
+
+
+
+    </body>
+</html>

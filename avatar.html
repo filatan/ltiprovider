@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classpip</title>
+    <link rel="stylesheet" type="text/css" href="/style-topNav.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style-avatar.css">
+    <script>
+        //PARAMS**GO**HERE
+    </script>
+</head>
+<body>
+    <div class="topnav">
+        <a onClick="
+            var path = `/cuestionarios/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista cuestionarios</a>
+        <a class="active" onClick="
+            var path = `/avatar/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Mi avatar</a>
+
+        <a onClick="
+            var path = `/alumnos/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de alumnos</a>
+
+        <a onClick="
+            var path = `/profesores/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de profesores </a>
+
+        <div id = "name" class = "profile">
+            <script>
+                document.write(`Hola ${params.user}`);
+            </script>
+        </div>
+        <div id="profile" class ="profile"></div>
+    </div>
+    <p/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var sessionID = this.params.sessionID;
+        var imagenUrl = "https://secret-dawn-80749.herokuapp.com/api/imagenes/imagenAlumno/download/";
+        var nombreImagen = this.params.imagenPerfil;
+        var urlImage = imagenUrl.concat(nombreImagen);
+        document.getElementById('profile').innerHTML = '<img src="' + urlImage + '" id="profileImage" style="width: 50px;height: 50px;"/>';
+    </script>
+
+    <div id = "avatar" class = mainRunner> </div>
+
+    <script>
+
+        let Silueta = this.params.Silueta;
+
+        if (Silueta === "undefined"){
+            document.getElementById('avatar').innerHTML = '<br><br><br><br> <p class ="alert"> No tienes nigún avatar definido </p> ';
+        }
+
+        else{
+
+
+            let Complemento1 = this.params.Complemento1;
+            let Complemento2 = this.params.Complemento2;
+            let Complemento3 = this.params.Complemento3;
+            let Complemento4 = this.params.Complemento4;
+
+            let downloadUrl = "https://secret-dawn-80749.herokuapp.com/api/imagenes/ImagenesAvatares/download/";
+            let downloadSilueta = downloadUrl.concat(Silueta);
+            let downloadComplemento1 = downloadUrl.concat(Complemento1);
+            let downloadComplemento2 = downloadUrl.concat(Complemento2);
+            let downloadComplemento3 = downloadUrl.concat(Complemento3);
+            let downloadComplemento4 = downloadUrl.concat(Complemento4);
+
+            let innerHtmlSilueta = '<img class="img1" src="' + downloadSilueta + '" id="silueta" style=""/>'
+            let innerHtmlComplemento1 = '<img class="img2" src="' + downloadComplemento1 + '" id="complemento1"/>'
+            let innerHtmlComplemento2 = '<img class="img3" src="' + downloadComplemento2 + '" id="complemento2" />'
+            let innerHtmlComplemento3 = '<img class="img4" src="' + downloadComplemento3 + '" id="complemento3" />'
+            let innerHtmlComplemento4 = '<img class="img5" src="' + downloadComplemento4 + '" id="complemento4" />'
+
+            document.getElementById('avatar').innerHTML = innerHtmlSilueta
+                + innerHtmlComplemento1 + innerHtmlComplemento2
+                + innerHtmlComplemento3 + innerHtmlComplemento4;
+        }
+    </script>
+
+
+
+
+</body>
+</html>

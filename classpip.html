@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classpip</title>
+    <link rel="stylesheet" type="text/css" href="/style-topNav.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script>
+        //PARAMS**GO**HERE
+    </script>
+</head>
+<body>
+
+    <div class="topnav">
+        <a onClick="
+        var path = `/cuestionarios/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+        document.location = path;
+        ">Lista cuestionarios</a>
+
+        <a onClick="
+            var path = `/avatar/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Mi avatar</a>
+        <a onClick="
+            var path = `/alumnos/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de alumnos</a>
+        <a onClick="
+            var path = `/profesores/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de profesores </a>
+
+        <div id = "name" class = "profile">
+            <script>
+                document.write(`Hola ${params.user}`);
+            </script>
+        </div>
+        <div id="profile" class ="profile"></div>
+    </div>
+    <p/>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var sessionID = this.params.sessionID;
+        var imagenUrl = "https://secret-dawn-80749.herokuapp.com/api/imagenes/imagenAlumno/download/";
+        var nombreImagen = this.params.imagenPerfil;
+        var urlImage = imagenUrl.concat(nombreImagen);
+        document.getElementById('profile').innerHTML = '<img src="' + urlImage + '" id="profileImage" style="width: 50px;height: 50px;"/>';
+    </script>
+
+
+    <br><br><br><br><br><br><br>
+
+    </p>
+    <p id = "classpipInto" style=" ">
+        Classpip es un proyecto creado por el departamento de Arquitectura de computadoras
+        de la Universidad Politécnica de Cataluña y ofrece una arquitectura de software
+        para alumnos y profesores para realizar actividades de gamificación en un entorno
+        educativo. Esto se permite realizar a través de diferentes plataformas como móviles,
+        tabletas o ordenadores.
+    </p>
+
+    <!--
+    <p/>
+    Obtener lista de cursos del alumno autenticado
+    <p/>
+
+    <button type="button" onClick="
+			var path = `/cursos/${params.user}/${params.sessionID}/${params.identificador}`;
+			document.location = path;
+		">Lista cursos </button>
+
+    <br/>
+    -->
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notas</title>
+    <link rel="stylesheet" type="text/css" href="/style-topNav.css">
+    <script>
+        //PARAMS**GO**HERE
+
+        let PuntuacionCorrecta = this.params.PuntuacionCorrecta;
+        let PuntuacionIncorrecta = this.params.PuntuacionIncorrecta;
+
+    </script>
+</head>
+<body>
+    <div class="topnav">
+        <a onClick="
+                    var path = `/cuestionarios/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+                    document.location = path;
+            ">Lista cuestionarios</a>
+
+        <a onClick="
+            var path = `/avatar/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Mi avatar</a>
+
+        <a onClick="
+            var path = `/alumnos/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de alumnos</a>
+
+        <a onClick="
+            var path = `/profesores/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de profesores </a>
+
+        <div id = "name" class = "profile">
+            <script>
+                document.write(`Hola ${params.user}`);
+            </script>
+        </div>
+        <div id="profile" class ="profile"></div>
+    </div>
+    <p/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var imagenUrl = "https://secret-dawn-80749.herokuapp.com/api/imagenes/imagenAlumno/download/";
+        var nombreImagen = this.params.imagenPerfil;
+        var urlImage = imagenUrl.concat(nombreImagen);
+        document.getElementById('profile').innerHTML = '<img src="' + urlImage + '" id="profileImage" style="width: 50px;height: 50px;"/>';
+    </script>
+
+    <p><i><b>
+        Este questionario ya ha sido completado.
+    </b></i></p>
+    <p>
+        Respuestas correctas :
+        <i><b>
+            <script>
+                document.write(` ${PuntuacionCorrecta}`);
+            </script>
+        </b></i>
+    </p>
+    <p>
+        Respuestas incorrectas :
+        <i><b>
+            <script>
+                document.write(` ${PuntuacionIncorrecta}`);
+            </script>
+        </b></i>
+    </p>
+
+</body>
+</html>

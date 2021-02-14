@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profesores</title>
+    <link rel="stylesheet" type="text/css" href="/style-topNav.css">
+    <link rel="stylesheet" type="text/css" href="/style-table.css">
+    <script>
+        //PARAMS**GO**HERE
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        let url = "https://secret-dawn-80749.herokuapp.com/api/Profesores"
+        $(document).ready(function(){
+            $.get(url, function(data, status){
+                var stringified = JSON.stringify(data);
+                var parsedObj = JSON.parse(stringified);
+                console.log(parsedObj);
+                var tabla = '<tr>\n' +
+                    '            <th>Nombre</th>\n' +
+                    '            <th>Apellido</th>\n' +
+                    '        </tr>';
+
+                for(var k=0; k < parsedObj.length; k++){
+                    tabla = tabla + '<tr>\n' +
+                        '            <td>' + parsedObj[k].Nombre +'</td>\n' +
+                        '            <td>' + parsedObj[k].Apellido +'</td>\n' +
+                        '        </tr>';
+                }
+                document.getElementById('tabla').innerHTML = tabla;
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<div class="topnav">
+    <a onClick="
+        var path = `/cuestionarios/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+        document.location = path;
+        ">Lista cuestionarios</a>
+
+    <a onClick="
+            var path = `/avatar/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Mi avatar</a>
+
+    <a onClick="
+            var path = `/alumnos/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de alumnos</a>
+
+    <a class="active" onClick="
+            var path = `/profesores/${params.user}/${params.sessionID}/${params.identificador}/${params.imagenPerfil}`;
+            document.location = path;
+            ">Lista de profesores </a>
+
+    <div id = "name" class = "profile">
+        <script>
+            document.write(`Hola ${params.user}`);
+        </script>
+    </div>
+    <div id="profile" class ="profile"></div>
+</div>
+
+<div>
+    <div>
+        <table id="tabla" style="width:100%"></table>
+    </div>
+
+</div>
+</body>
+</html>

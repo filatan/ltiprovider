@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="/style-login.css">
+
+        <script>
+            //PARAMS**GO**HERE
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+
+        </script>
+
+    </head>
+    <body>
+
+    <div class="container">
+        <div id = "welcome" style >
+            Bienvenido a Classpip
+        </div>
+
+        <div id = "inData" style >
+            Por favor introduzca su Usuario y Contraseña
+        </div>
+
+        <div>
+                <input type="text" placeholder="Introduzca Usuario" name="uname" id="uname" required>
+        </div>
+
+        <div>
+            <input type="password" placeholder="Introduzca Contraseña" name="psw" id="psw" required>
+        </div>
+
+        <br/>
+        <div>
+            <button type="button" onclick="
+                let username = document.getElementById(`uname`).value;
+                let password = document.getElementById(`psw`).value;
+                let path = `/login/${params.sessionID}/${params.user}/${params.nombre}/${params.apellido}/${username}/${password}`;
+                document.location = path;
+            ">Iniciar Sesión</button>
+        </div>
+    </div>
+
+    </body>
+</html>
